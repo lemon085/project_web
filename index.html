@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <title>AI-Driven DevOps Automation</title>
 
-  <!-- Security Headers -->
+  <!-- STRICT CONTENT SECURITY POLICY (NO unsafe-inline) -->
   <meta http-equiv="Content-Security-Policy"
         content="
         default-src 'self';
         img-src 'self' data:;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        style-src 'self' https://fonts.googleapis.com;
         font-src https://fonts.gstatic.com;
-        script-src 'self' https://cdn.jsdelivr.net;
+        script-src 'self' https://cdn.jsdelivr.net 'nonce-abc123';
         connect-src 'self';
         object-src 'none';
         base-uri 'self';
@@ -22,7 +22,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
 
   <style>
     :root{
@@ -196,7 +198,7 @@
 <body>
 
 <nav>
-  <img src="logo.png" alt="Logo" class="logo">
+  <img src="logo.png" alt="Logo" class="logo" loading="lazy">
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
     <li><a href="#team">Team</a></li>
@@ -208,7 +210,7 @@
 <section id="hero">
   <div id="particles-js"></div>
   <h1>AI-Driven DevOps Automation</h1>
-  <p>Automate CI/CD, Docker, and cloud workflows securely using AI-powered pipelines.</p>
+  <p>Secure AI-powered pipelines for CI/CD, Docker and cloud automation.</p>
   <a href="#team" class="cta">Meet the Team</a>
 </section>
 
@@ -216,17 +218,17 @@
   <h2>Meet the Founders</h2>
   <div class="team-grid">
     <div class="member">
-      <img src="shakeel.jpg" alt="Shakeel Ahmed">
+      <img src="shakeel.jpg" alt="Shakeel Ahmed" loading="lazy">
       <h3>Shakeel Ahmed</h3>
       <p>Founder & AI Engineer</p>
     </div>
     <div class="member">
-      <img src="faizan.jpg" alt="Faizan Ali">
+      <img src="faizan.jpg" alt="Faizan Ali Arain" loading="lazy">
       <h3>Faizan Ali Arain</h3>
       <p>Full-Stack Developer</p>
     </div>
     <div class="member">
-      <img src="qayoom.jpg" alt="Abdul Qayoom">
+      <img src="qayoom.jpg" alt="Abdul Qayoom" loading="lazy">
       <h3>Abdul Qayoom</h3>
       <p>DevOps & Cloud Specialist</p>
     </div>
@@ -236,8 +238,10 @@
 <section id="contact">
   <h2>Get In Touch</h2>
 
-  <!-- Secure Server-Side Endpoint -->
   <form action="/contact" method="POST">
+    <!-- CSRF PROTECTION -->
+    <input type="hidden" name="csrf_token" value="{{CSRF_TOKEN}}">
+
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
     <textarea name="message" rows="5" placeholder="Message" required></textarea>
@@ -249,13 +253,14 @@
   &copy; <span id="year"></span> AI-Driven DevOps Automation. All rights reserved.
 </footer>
 
-<!-- Secure External Script with SRI -->
+<!-- External Script with SRI -->
 <script
   src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
   integrity="sha384-9z0EsmxKZ4e1J3cN9cfk4C5dY1Zc1YlXz+eQof8I4e+OeXtfLOcAfeUeE1Y2K6xa"
   crossorigin="anonymous"></script>
 
-<script>
+<!-- INLINE SCRIPT WITH CSP NONCE -->
+<script nonce="abc123">
   document.getElementById('year').textContent = new Date().getFullYear();
 
   particlesJS('particles-js',{
