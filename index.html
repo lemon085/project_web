@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <title>AI-Driven DevOps Automation</title>
 
-  <!-- STRICT CSP (NO NONCE, NO INLINE) -->
+  <!-- STRICT SECURITY HEADERS -->
   <meta http-equiv="Content-Security-Policy"
         content="
         default-src 'self';
-        img-src 'self' data:;
+        img-src 'self';
         style-src 'self' https://fonts.googleapis.com;
         font-src https://fonts.gstatic.com;
         script-src 'self' https://cdn.jsdelivr.net;
@@ -19,25 +19,34 @@
         frame-ancestors 'none';
         ">
 
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google Font -->
+  <!-- Google Fonts -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
 
-  <!-- External CSS -->
+  <!-- External CSS (NO inline styles) -->
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
 
 <nav>
-  <img src="logo.png" alt="Logo" class="logo" loading="lazy">
+  <img
+    src="logo.png"
+    alt="Logo"
+    class="logo"
+    loading="lazy"
+    width="128"
+    height="128">
+
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+
   <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
 </nav>
 
@@ -53,19 +62,34 @@
 
   <div class="team-grid">
     <div class="member">
-      <img src="shakeel.jpg" alt="Shakeel Ahmed" loading="lazy">
+      <img
+        src="shakeel.jpg"
+        alt="Shakeel Ahmed"
+        loading="lazy"
+        width="140"
+        height="140">
       <h3>Shakeel Ahmed</h3>
       <p>Founder & AI Engineer</p>
     </div>
 
     <div class="member">
-      <img src="faizan.jpg" alt="Faizan Ali Arain" loading="lazy">
+      <img
+        src="faizan.jpg"
+        alt="Faizan Ali Arain"
+        loading="lazy"
+        width="140"
+        height="140">
       <h3>Faizan Ali Arain</h3>
       <p>Full-Stack Developer</p>
     </div>
 
     <div class="member">
-      <img src="qayoom.jpg" alt="Abdul Qayoom" loading="lazy">
+      <img
+        src="qayoom.jpg"
+        alt="Abdul Qayoom"
+        loading="lazy"
+        width="140"
+        height="140">
       <h3>Abdul Qayoom</h3>
       <p>DevOps & Cloud Specialist</p>
     </div>
@@ -91,13 +115,13 @@
   &copy; <span id="year"></span> AI-Driven DevOps Automation. All rights reserved.
 </footer>
 
-<!-- CDN WITH SRI -->
+<!-- CDN SCRIPT WITH SRI -->
 <script
   src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
   integrity="sha384-9z0EsmxKZ4e1J3cN9cfk4C5dY1Zc1YlXz+eQof8I4e+OeXtfLOcAfeUeE1Y2K6xa"
   crossorigin="anonymous"></script>
 
-<!-- External JS -->
+<!-- External JS (NO inline JS) -->
 <script src="/assets/js/app.js"></script>
 
 </body>
