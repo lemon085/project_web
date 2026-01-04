@@ -23,6 +23,19 @@ body{
   color:var(--text);
 }
 
+/* Accessibility helper */
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
 /* NAV */
 nav{
   position:fixed;
@@ -112,7 +125,9 @@ form{
   flex-direction:column;
   gap:15px;
 }
+label{display:block}
 input,textarea{
+  width:100%;
   padding:14px;
   border-radius:12px;
   border:none;
@@ -151,27 +166,30 @@ footer{
 <section id="hero">
   <h2>AI-Driven DevOps Automation</h2>
   <p>
-    Automate CI/CD, Docker builds, cloud deployment and monitoring using
-    intelligent AI-powered pipelines.
+    Automate CI/CD, Docker builds, and cloud deployment using intelligent,
+    AI-powered DevOps pipelines.
   </p>
   <a href="#team" class="btn">Meet the Team</a>
 </section>
 
 <section id="team">
   <h3>Meet the Founders</h3>
+
   <div class="team">
     <div class="card">
-      <img src="shakeel.jpg" alt="Shakeel Ahmed">
+      <img src="shakeel.jpg" alt="Shakeel Ahmed" loading="lazy">
       <h4>Shakeel Ahmed</h4>
       <p>Founder & AI Engineer</p>
     </div>
+
     <div class="card">
-      <img src="faizan.jpg" alt="Faizan Ali">
+      <img src="faizan.jpg" alt="Faizan Ali" loading="lazy">
       <h4>Faizan Ali Arain</h4>
       <p>Full-Stack Developer</p>
     </div>
+
     <div class="card">
-      <img src="qayoom.jpg" alt="Abdul Qayoom">
+      <img src="qayoom.jpg" alt="Abdul Qayoom" loading="lazy">
       <h4>Abdul Qayoom</h4>
       <p>DevOps & Cloud Specialist</p>
     </div>
@@ -180,10 +198,25 @@ footer{
 
 <section id="contact">
   <h3>Get In Touch</h3>
-  <form>
-    <input type="text" placeholder="Your Name" required>
-    <input type="email" placeholder="Your Email" required>
-    <textarea rows="5" placeholder="Message" required></textarea>
+
+  <!-- FIXED: action + method -->
+  <form action="/contact" method="post">
+
+    <label>
+      <span class="sr-only">Your Name</span>
+      <input type="text" name="name" placeholder="Your Name" required>
+    </label>
+
+    <label>
+      <span class="sr-only">Your Email</span>
+      <input type="email" name="email" placeholder="Your Email" required>
+    </label>
+
+    <label>
+      <span class="sr-only">Message</span>
+      <textarea name="message" rows="5" placeholder="Message" required></textarea>
+    </label>
+
     <button type="submit">Send Message</button>
   </form>
 </section>
