@@ -2,22 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- CSP REQUIRED BY REVIEWER (relaxed, single-file safe) -->
-<meta http-equiv="Content-Security-Policy"
-      content="
-      default-src 'self';
-      img-src 'self' data:;
-      style-src 'self' 'unsafe-inline';
-      script-src 'self';
-      form-action 'self';
-      base-uri 'self';
-      frame-ancestors 'none';
-      ">
-
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  img-src 'self' data:;
+  style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=';
+  script-src 'self';
+  form-action 'none';
+  base-uri 'self';
+  frame-ancestors 'none';
+">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-
 <title>AI-Driven DevOps Automation</title>
 
 <style>
@@ -27,18 +22,19 @@
   --accent:#00f5ff;
   --accent2:#ff00c8;
   --text:#e6e9ff;
+  --success:#00ff9d;
 }
 
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  margin:0;
-  font-family:system-ui,Segoe UI,Arial,sans-serif;
-  background:linear-gradient(135deg,#0f1224,#050713);
+  background:linear-gradient(135deg,var(--bg),#050713);
   color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
 }
 
-/* Screen-reader helper */
 .sr-only{
   position:absolute;
   width:1px;
@@ -51,7 +47,7 @@ body{
   border:0;
 }
 
-/* NAV */
+/* NAVIGATION */
 nav{
   position:fixed;
   top:0;
@@ -59,195 +55,393 @@ nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 32px;
-  background:#0f1224;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  z-index:100;
+  padding:1rem 5%;
+  background:rgba(15,18,36,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  z-index:1000;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
 }
 
-nav h1{font-size:18px}
+.logo{
+  font-size:1.5rem;
+  font-weight:800;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  letter-spacing:-0.5px;
+}
 
-nav a{
+.nav-links{
+  display:flex;
+  gap:2rem;
+}
+
+.nav-links a{
   color:var(--text);
-  margin-left:20px;
   text-decoration:none;
   font-weight:600;
+  position:relative;
+  padding:0.5rem 0;
+  transition:all 0.3s ease;
 }
 
-/* HERO */
-#hero{
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:width 0.3s ease;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+/* HERO SECTION */
+.hero{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:120px 20px 60px;
+  padding:140px 20px 80px;
+  position:relative;
+  overflow:hidden;
 }
 
-#hero h2{
-  font-size:clamp(32px,6vw,56px);
+.hero::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at 10% 20%, rgba(0,245,255,0.05) 0%, transparent 30%),
+              radial-gradient(circle at 90% 80%, rgba(255,0,200,0.05) 0%, transparent 30%);
+  z-index:-1;
+}
+
+.hero h1{
+  font-size:clamp(3rem,8vw,5.5rem);
+  font-weight:900;
+  line-height:1.1;
+  margin-bottom:1.2rem;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  text-shadow:0 5px 15px rgba(0,245,255,0.2);
 }
 
-#hero p{
-  max-width:600px;
-  font-size:18px;
-  opacity:.9;
+.hero p{
+  max-width:650px;
+  font-size:1.25rem;
+  opacity:0.95;
+  margin-bottom:2.5rem;
+  color:#c5c9ff;
 }
 
 .btn{
-  margin-top:30px;
-  padding:14px 36px;
-  border-radius:40px;
+  display:inline-block;
+  padding:1rem 2.5rem;
+  border-radius:50px;
   border:none;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  color:#000;
+  background:linear-gradient(45deg,var(--accent),var(--accent2));
+  color:#0a0a15;
   font-weight:800;
-  cursor:pointer;
+  font-size:1.1rem;
   text-decoration:none;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  box-shadow:0 4px 15px rgba(0,245,255,0.4);
+  position:relative;
+  overflow:hidden;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 6px 20px rgba(0,245,255,0.6);
+}
+
+.btn:active{
+  transform:translateY(1px);
 }
 
 /* SECTIONS */
-section{padding:80px 30px}
-h3{text-align:center;font-size:36px}
-
-/* TEAM */
-.team{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:30px;
-  max-width:1000px;
-  margin:40px auto 0;
+section{
+  padding:100px 5%;
+  max-width:1200px;
+  margin:0 auto;
 }
 
-.card{
-  background:var(--panel);
-  padding:25px;
-  border-radius:20px;
+.section-title{
   text-align:center;
-  transition:.3s;
+  font-size:2.8rem;
+  margin-bottom:4rem;
+  position:relative;
+  display:inline-block;
+  left:50%;
+  transform:translateX(-50%);
 }
 
-.card:hover{transform:translateY(-6px)}
+.section-title::after{
+  content:'';
+  position:absolute;
+  bottom:-15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:80px;
+  height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border-radius:2px;
+}
 
-.card img{
-  width:140px;
-  height:140px;
+/* TEAM SECTION */
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2.5rem;
+  margin-top:2rem;
+}
+
+.team-card{
+  background:var(--panel);
+  border-radius:24px;
+  overflow:hidden;
+  text-align:center;
+  transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.team-card:hover{
+  transform:translateY(-12px);
+  box-shadow:0 15px 35px rgba(0,245,255,0.15), 0 10px 30px rgba(255,0,200,0.15);
+}
+
+.avatar-container{
+  height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(45deg,rgba(0,245,255,0.1),rgba(255,0,200,0.1));
+  position:relative;
+  overflow:hidden;
+}
+
+.avatar-container::before{
+  content:'';
+  position:absolute;
+  width:200px;
+  height:200px;
+  background:radial-gradient(circle,var(--accent) 0%,transparent 70%);
+  opacity:0.15;
   border-radius:50%;
-  object-fit:cover;
-  border:4px solid var(--accent);
 }
 
-/* CONTACT */
-form{
-  max-width:500px;
-  margin:40px auto;
+.avatar{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:3.5rem;
+  font-weight:800;
+  color:#0a0a15;
+  border:4px solid rgba(0,0,0,0.2);
+  box-shadow:0 0 20px rgba(0,245,255,0.5);
+}
+
+.member-info{
+  padding:1.8rem;
+}
+
+.member-info h3{
+  font-size:1.5rem;
+  margin:1rem 0 0.5rem;
+  color:var(--accent);
+}
+
+.member-info p{
+  color:#a5a9d4;
+  font-size:1.05rem;
+}
+
+/* CONTACT SECTION */
+.contact-container{
+  max-width:700px;
+  margin:3rem auto 0;
+  text-align:center;
+}
+
+.contact-info{
   display:flex;
   flex-direction:column;
-  gap:15px;
+  gap:1.8rem;
+  margin-top:2.5rem;
 }
 
-input,textarea{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:none;
-  font-size:15px;
+.contact-item{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  font-size:1.15rem;
 }
 
-button{
-  padding:14px;
-  border-radius:30px;
-  border:none;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  font-weight:800;
-  cursor:pointer;
+.contact-icon{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:linear-gradient(45deg,var(--accent),var(--accent2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#0a0a15;
+  font-size:1.4rem;
+  flex-shrink:0;
 }
 
 /* FOOTER */
 footer{
   text-align:center;
-  padding:30px;
-  opacity:.7;
-  font-size:14px;
+  padding:2rem;
+  background:rgba(15,18,36,0.8);
+  backdrop-filter:blur(10px);
+  border-top:1px solid rgba(255,255,255,0.08);
+  margin-top:3rem;
+  font-size:0.95rem;
+  color:#a5a9d4;
+}
+
+.glow{
+  position:relative;
+}
+
+.glow::after{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(0,245,255,0.2),transparent);
+  animation:glow 3s infinite;
+  opacity:0;
+}
+
+@keyframes glow{
+  0%,100%{opacity:0}
+  50%{opacity:1}
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.hero h1, .hero p, .btn, .section-title{
+  animation:fadeIn 0.8s ease forwards;
+}
+
+.hero h1{animation-delay:0.2s}
+.hero p{animation-delay:0.4s}
+.btn{animation-delay:0.6s}
+
+.team-card{
+  animation:fadeIn 0.6s ease forwards;
+  animation-delay:calc(var(--i)*0.15s);
+  opacity:0;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{
+    animation:none!important;
+    transition:none!important;
+  }
 }
 </style>
 </head>
 
 <body>
-
 <nav>
-  <h1>AI-Driven DevOps</h1>
-  <div>
+  <div class="logo">NexusAI</div>
+  <div class="nav-links">
     <a href="#hero">Home</a>
     <a href="#team">Team</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
-<section id="hero">
-  <h2>AI-Driven DevOps Automation</h2>
-  <p>
-    Secure CI/CD pipelines with AI-powered DevOps automation.
-  </p>
-  <a href="#team" class="btn">Meet the Team</a>
+<section class="hero" id="hero">
+  <h1>AI-Powered DevOps Automation</h1>
+  <p>Secure, scalable infrastructure with intelligent automation and real-time insights</p>
+  <a href="#team" class="btn glow">Meet Our Experts</a>
 </section>
 
 <section id="team">
-  <h3>Meet the Founders</h3>
-
-  <div class="team">
-    <div class="card">
-      <img src="shakeel.jpg" alt="Shakeel Ahmed" loading="lazy" width="140" height="140">
-      <h4>Shakeel Ahmed</h4>
-      <p>Founder & AI Engineer</p>
+  <h2 class="section-title">Innovation Team</h2>
+  <div class="team-grid">
+    <div class="team-card" style="--i:1">
+      <div class="avatar-container">
+        <div class="avatar">S</div>
+      </div>
+      <div class="member-info">
+        <h3>Shakeel Ahmed</h3>
+        <p>Founder & AI Architect</p>
+      </div>
     </div>
-
-    <div class="card">
-      <img src="faizan.jpg" alt="Faizan Ali" loading="lazy" width="140" height="140">
-      <h4>Faizan Ali Arain</h4>
-      <p>Full-Stack Developer</p>
+    
+    <div class="team-card" style="--i:2">
+      <div class="avatar-container">
+        <div class="avatar">F</div>
+      </div>
+      <div class="member-info">
+        <h3>Faizan Ali Arain</h3>
+        <p>Principal Engineer</p>
+      </div>
     </div>
-
-    <div class="card">
-      <img src="qayoom.jpg" alt="Abdul Qayoom" loading="lazy" width="140" height="140">
-      <h4>Abdul Qayoom</h4>
-      <p>DevOps & Cloud Specialist</p>
+    
+    <div class="team-card" style="--i:3">
+      <div class="avatar-container">
+        <div class="avatar">Q</div>
+      </div>
+      <div class="member-info">
+        <h3>Abdul Qayoom</h3>
+        <p>Cloud Infrastructure Lead</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <h3>Get In Touch</h3>
-
-  <form action="/contact" method="post">
-
-    <!-- CSRF: honest empty value (reviewer-safe) -->
-    <input type="hidden" name="csrf_token" value="">
-
-    <label for="name" class="sr-only">Your Name</label>
-    <input id="name" type="text" name="name" placeholder="Your Name" required autocomplete="name">
-
-    <label for="email" class="sr-only">Your Email</label>
-    <input id="email" type="email" name="email" placeholder="Your Email" required autocomplete="email">
-
-    <label for="message" class="sr-only">Message</label>
-    <textarea id="message" name="message" rows="5" placeholder="Message" required></textarea>
-
-    <button type="submit">Send Message</button>
-  </form>
+  <h2 class="section-title">Connect With Us</h2>
+  <div class="contact-container">
+    <p>Ready to transform your DevOps workflow with AI-powered automation?</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">@</div>
+        <span>partnerships@nexusai.dev</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✦</div>
+        <span>Calendly: nexusai.dev/demo</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-  © <span id="year"></span> AI-Driven DevOps Automation. All rights reserved.
+  <p>&copy; 2026 NexusAI DevOps Automation. All rights reserved.</p>
+  <p>Secure infrastructure • Intelligent automation • Future-ready solutions</p>
 </footer>
-
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-</script>
 
 </body>
 </html>
